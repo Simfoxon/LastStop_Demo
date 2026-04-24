@@ -65,7 +65,6 @@
         let ziel = null;
         let notified = false;   
 
-        // TEST-DATEN (später durch echte ersetzen)
         let stops = [];
 
         fetch("stops.txt")
@@ -125,6 +124,11 @@
                     ziel = stop;
                     notified = false;
 
+                    //für Nachrichten Auserhalb des Browsers
+                    if (Notification.permission !== "granted") {
+                        Notification.requestPermission();
+                    }
+                    
                     console.log("Ziel gesetzt:", ziel);
 
                     // 🔥 SOFORT TESTEN (wichtig!)
@@ -202,8 +206,9 @@
                 distanceBox.textContent = `Entfernung: ${Math.round(dist)} Meter`;
 
                 if (dist < 150 && !notified) {
+                    notifyUser();
                     notified = true;
-                    alert("Du bist fast da!");
+                    //alert("Du bist fast da!");
                 }
             }
 
@@ -219,6 +224,15 @@
                     alert("Du bist fast da!");
                 }
             }*/
+
+        //Nachricht außerhalb des Browsers
+        function notifyUser() {
+            if (Notification.permission === "granted") {
+                new Notification("🚏 Gleich aussteigen!", {
+                    body: "Deine Haltestelle ist nur noch 150m entfernt!"
+                });
+            }
+        }
     </script>
 
 </body>
