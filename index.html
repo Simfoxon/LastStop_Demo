@@ -232,7 +232,7 @@
 
         //Nachricht außerhalb des Browsers
         function notifyUser() {
-            alert("notifyUser wurde aufgerufen");
+            alert("Permission:", Notification.permission);
             if (Notification.permission === "granted") {
                 alert("nachricht sollte jetzt kommen");
                 new Notification("🚏 Gleich aussteigen!", {
