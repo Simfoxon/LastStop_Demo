@@ -232,6 +232,9 @@
 
         //Nachricht außerhalb des Browsers
         function notifyUser() {
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
             alert("Permission:", Notification.permission);
             if (Notification.permission === "granted") {
                 alert("nachricht sollte jetzt kommen");
